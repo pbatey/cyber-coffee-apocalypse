@@ -1,0 +1,6 @@
+.joe {
+  position: relative;
+  width: 80px;
+  height: 160px;
+  background: url('images/joe-walk-cycle.png') left top;
+}
