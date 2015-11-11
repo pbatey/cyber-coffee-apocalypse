@@ -1,0 +1,8 @@
+.theShop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2048px;
+  height: 1024px;
+  background: url('images/theShop.png') left top;
+}

@@ -1,0 +1,6 @@
+.logo {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  background: url('images/logo.png') center top;
+}
