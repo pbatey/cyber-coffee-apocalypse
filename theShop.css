@@ -4,5 +4,26 @@
   left: 0;
   width: 2048px;
   height: 1024px;
-  background: url('images/theShop.png') left top;
+}
+
+.theShop .floor-tile {
+  position: absolute;
+  width: 320px;
+  height: 160px;
+  background: url('images/floor.png') left top;
+}
+
+.theShop .floor-tile.checker-1 {
+  background-position-x: 320px;
+}
+
+.theShop .wall-tile {
+  position: absolute;
+  width: 160px;
+  height: 240px;
+  background: url('images/wall.png') left top;
+}
+
+.theShop .wall-tile.facing-left {
+  background-position-x: 160px;
 }
