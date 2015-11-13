@@ -59,3 +59,20 @@
 .theShop .chair.facing-right{
   background-position-x: 264px;
 }
+.theShop .cup {
+  position: relative;
+  top: 29px;
+  left: 46px;
+  width: 40px;
+  height: 40px;
+  background: url('images/coffee-cup.png') left top;
+}
+
+.theShop .cup.cup-paper {
+  background-position-x: 40px;
+}
+
+.theShop .cup.checker-1 {
+  top: 43px;
+  left: 72px;
+}

@@ -3,23 +3,33 @@ Table = React.createClass({
     x: React.PropTypes.number,
     y: React.PropTypes.number,
     round: React.PropTypes.bool,
+    cup: React.PropTypes.string
+  },
+
+  renderCup() {
+    const checker = (this.props.x+this.props.y)%2;
+    if (this.props.cup === 'none') return;
+    else {
+      const className = "cup cup-" + this.props.cup + ' checker-' + checker;
+      return (<div className={className} />);
+    }
   },
 
   render() {
-      const offx = 80;
-      const offy = 80;
-      const dx = 80;
-      const dy = 40;
-      const left = offx + (this.props.x*dx)-(this.props.y*dx);
-      const top = offy + (this.props.x+this.props.y)*dy;
-      const className = this.props.round ? 'table-round' : 'table-square';
-      const divStyle = {
-          top: top,
-          left: left
-      };
+    const offx = 80;
+    const offy = 80;
+    const dx = 80;
+    const dy = 40;
+    const left = offx + (this.props.x*dx)-(this.props.y*dx);
+    const top = offy + (this.props.x+this.props.y)*dy;
+    const className = 'table ' + (this.props.round ? 'table-round' : 'table-square');
+    const divStyle = {
+      top: top,
+      left: left
+    };
 
     return (
-      <div className={className} style={divStyle}></div>
+      <div className={className} style={divStyle}>{this.renderCup(this.props.cup)}</div>
     );
   }
 });
@@ -32,17 +42,17 @@ Chair = React.createClass({
   },
 
   render() {
-      const offx = 112;
-      const offy = 108;
-      const dx = 80;
-      const dy = 40;
-      const left = offx + (this.props.x*dx)-(this.props.y*dx);
-      const top = offy + (this.props.x+this.props.y)*dy;
-      const className = 'chair ' + 'facing-' + this.props.facing;
-      const divStyle = {
-          top: top,
-          left: left
-      };
+    const offx = 112;
+    const offy = 108;
+    const dx = 80;
+    const dy = 40;
+    const left = offx + (this.props.x*dx)-(this.props.y*dx);
+    const top = offy + (this.props.x+this.props.y)*dy;
+    const className = 'chair ' + 'facing-' + this.props.facing;
+    const divStyle = {
+    top: top,
+    left: left
+    };
 
     return (
       <div className={className} style={divStyle}></div>
@@ -59,19 +69,19 @@ WallTile = React.createClass({
   },
 
   render() {
-      const facingOffy = { right: 0, left: 160 };
-      const offx = facingOffy[this.props.facing];
-      const offy = 0;
-      const dx = 160;
-      const dy = 80;
-      const dz = -160;
-      const left = offx + (this.props.x*dx)-(this.props.y*dx);
-      const top = offy + (this.props.x+this.props.y)*dy + (this.props.z*dz);
-      const checker = (this.props.x+this.props.y)%2;
-      const className = 'wall-tile' + ' facing-' + this.props.facing;
-      const divStyle = {
-          top: top,
-          left: left
+    const facingOffy = { right: 0, left: 160 };
+    const offx = facingOffy[this.props.facing];
+    const offy = 0;
+    const dx = 160;
+    const dy = 80;
+    const dz = -160;
+    const left = offx + (this.props.x*dx)-(this.props.y*dx);
+    const top = offy + (this.props.x+this.props.y)*dy + (this.props.z*dz);
+    const checker = (this.props.x+this.props.y)%2;
+    const className = 'wall-tile' + ' facing-' + this.props.facing;
+    const divStyle = {
+      top: top,
+      left: left
       };
 
     return (
@@ -87,18 +97,18 @@ FloorTile = React.createClass({
   },
 
   render() {
-      const offx = 0;
-      const offy = 160;
-      const dx = 160;
-      const dy = 80;
-      const left = offx + (this.props.x*dx)-(this.props.y*dx);
-      const top = offy + (this.props.x+this.props.y)*dy;
-      const checker = (this.props.x+this.props.y)%2;
-      const className = 'floor-tile ' + 'checker-' + checker;
-      const divStyle = {
-          top: top,
-          left: left
-      };
+    const offx = 0;
+    const offy = 160;
+    const dx = 160;
+    const dy = 80;
+    const left = offx + (this.props.x*dx)-(this.props.y*dx);
+    const top = offy + (this.props.x+this.props.y)*dy;
+    const checker = (this.props.x+this.props.y)%2;
+    const className = 'floor-tile ' + 'checker-' + checker;
+    const divStyle = {
+      top: top,
+      left: left
+    };
 
     return (
       <div className={className} style={divStyle}></div>
@@ -136,30 +146,32 @@ TheShop  = React.createClass({
 
   renderTablesAndChairs(floorPlan) {
     var tiles = [];
+    const cupTypes = [ 'none', 'paper', 'china' ];
     const round = true;
     const notRound = false;
     for (var i=0; i<floorPlan.length; i++) {
       for (var j=0; j<floorPlan[i].length; j++) {
+        const cupType = cupTypes[(i+j)%3];
         const key=i + '.' + j;
         const c = floorPlan[i].charAt(j);
         switch (c) {
           case 'T':
-            tiles.push(<Table key={key} x={j} y={i} round={notRound}/>);
+            tiles.push(<Table key={key} x={j} y={i} round={notRound} cup={cupType}/>);
             break;
           case 'o':
-            tiles.push(<Table key={key} x={j} y={i} round={round}/>);
+            tiles.push(<Table key={key} x={j} y={i} round={round} cup={cupType}/>);
             break;
           case '>':
-            tiles.push(<Chair key={key} x={j} y={i} facing='right'/>);
+            tiles.push(<Chair key={key} x={j} y={i} facing='right' cup={cupType}/>);
             break;
           case '<':
-            tiles.push(<Chair key={key} x={j} y={i} facing='left'/>);
+            tiles.push(<Chair key={key} x={j} y={i} facing='left' cup={cupType}/>);
             break;
           case '^':
-            tiles.push(<Chair key={key} x={j} y={i} facing='back'/>);
+            tiles.push(<Chair key={key} x={j} y={i} facing='back' cup={cupType}/>);
             break;
           case 'v':
-            tiles.push(<Chair key={key} x={j} y={i} facing='front'/>);
+            tiles.push(<Chair key={key} x={j} y={i} facing='front' cup={cupType}/>);
             break;
         }
       }
