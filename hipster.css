@@ -1,0 +1,6 @@
+.hipster {
+  position: relative;
+  width: 80px;
+  height: 160px;
+  background: url('images/hipster-walk-cycle.png') left top;
+}

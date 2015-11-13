@@ -11,6 +11,7 @@ App = React.createClass({
         <TheShop />
         <Logo />
         <Joe />
+        <Hipster />
       </div>
     );
   }
