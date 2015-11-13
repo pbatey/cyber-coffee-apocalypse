@@ -1,21 +1,54 @@
-var level = [
-  '       T       ',
-  ' >o T< ^ o< T< ',
-  '               ',
-  ' >o v TTT o >o ',
-  '    T  ^  ^    ',
-  'v v T<   >o o< ',
-  'TTT ^     ^ ^v ',
-  '^ ^    v    >T<',
-  '      >T<      ',
-  'vv  o  ^  o TTT',
-  'TT< ^       ^ ^',
-  '      TTT o    ',
-  '       ^    >T<',
-  '>o           T<',
-  '   v  TTT  v   ',
-  ' >TT<     >T<  ',
-  ];
+Table = React.createClass({
+  propTypes: {
+    x: React.PropTypes.number,
+    y: React.PropTypes.number,
+    round: React.PropTypes.bool,
+  },
+
+  render() {
+      const offx = 80;
+      const offy = 80;
+      const dx = 80;
+      const dy = 40;
+      const left = offx + (this.props.x*dx)-(this.props.y*dx);
+      const top = offy + (this.props.x+this.props.y)*dy;
+      const className = this.props.round ? 'table-round' : 'table-square';
+      const divStyle = {
+          top: top,
+          left: left
+      };
+
+    return (
+      <div className={className} style={divStyle}></div>
+    );
+  }
+});
+
+Chair = React.createClass({
+  propTypes: {
+    x: React.PropTypes.number,
+    y: React.PropTypes.number,
+    facing: React.PropTypes.string,
+  },
+
+  render() {
+      const offx = 112;
+      const offy = 108;
+      const dx = 80;
+      const dy = 40;
+      const left = offx + (this.props.x*dx)-(this.props.y*dx);
+      const top = offy + (this.props.x+this.props.y)*dy;
+      const className = 'chair ' + 'facing-' + this.props.facing;
+      const divStyle = {
+          top: top,
+          left: left
+      };
+
+    return (
+      <div className={className} style={divStyle}></div>
+    );
+  }
+});
 
 WallTile = React.createClass({
   propTypes: {
@@ -101,11 +134,70 @@ TheShop  = React.createClass({
     return <div className='floor'>{tiles}</div>
   },
 
+  renderTablesAndChairs(floorPlan) {
+    var tiles = [];
+    const round = true;
+    const notRound = false;
+    for (var i=0; i<floorPlan.length; i++) {
+      for (var j=0; j<floorPlan[i].length; j++) {
+        const key=i + '.' + j;
+        const c = floorPlan[i].charAt(j);
+        switch (c) {
+          case 'T':
+            tiles.push(<Table key={key} x={j} y={i} round={notRound}/>);
+            break;
+          case 'o':
+            tiles.push(<Table key={key} x={j} y={i} round={round}/>);
+            break;
+          case '>':
+            tiles.push(<Chair key={key} x={j} y={i} facing='right'/>);
+            break;
+          case '<':
+            tiles.push(<Chair key={key} x={j} y={i} facing='left'/>);
+            break;
+          case '^':
+            tiles.push(<Chair key={key} x={j} y={i} facing='back'/>);
+            break;
+          case 'v':
+            tiles.push(<Chair key={key} x={j} y={i} facing='front'/>);
+            break;
+        }
+      }
+    }
+    return <div>{tiles}</div>
+  },
+
+  getDefaultProps() {
+    return {
+      floorPlan: [
+        'T      T       ',
+        '^>o T< ^ o< T< ',
+        '               ',
+        ' >o v TTT o >o ',
+        '    T  ^  ^    ',
+        'v v T<   >o o< ',
+        'TTT ^     ^ ^v ',
+        '^ ^    v    >T<',
+        '      >T<      ',
+        'vv  o  ^  o TTT',
+        'TT< ^       ^ ^',
+        '      TTT o    ',
+        '       ^    >T<',
+        '>o           T<',
+        '   v  TTT  v   ',
+        ' >TT<     >T<  ',
+        ]
+    }
+  },
+
   render() {
+    const depth = this.props.floorPlan.length;
+    const width = this.props.floorPlan[0].length;
     return (
       <div className='theShop'>
-        {this.renderWalls(16,16,2)}
-        {this.renderFloor(16,16)}
+        {this.renderWalls(width/2,depth/2,2)}
+        {this.renderFloor(width/2,depth/2)}
+        {this.renderTablesAndChairs(this.props.floorPlan)}
       </div>
     );
   }

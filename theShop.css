@@ -11,6 +11,7 @@
   width: 320px;
   height: 160px;
   background: url('images/floor.png') left top;
+  _background: url('images/grid.png') left top;
 }
 
 .theShop .floor-tile.checker-1 {
@@ -26,4 +27,35 @@
 
 .theShop .wall-tile.facing-left {
   background-position-x: 160px;
+}
+
+.theShop .table-square {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: url('images/table.png') left top;
+}
+
+.theShop .table-round {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: url('images/table.png') left top;
+  background-position-x: 160px;
+}
+
+.theShop .chair {
+  position: absolute;
+  width: 88px;
+  height: 120px;
+  background: url('images/chair.png') left top;
+}
+.theShop .chair.facing-front {
+  background-position-x: 88px;
+}
+.theShop .chair.facing-left {
+  background-position-x: 176px;
+}
+.theShop .chair.facing-right{
+  background-position-x: 264px;
 }
