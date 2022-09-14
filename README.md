@@ -2,6 +2,8 @@
 
 A Game to promote good security practices.
 
+***Note:*** This is now mainly a place to hold the sprites - check 'em out in [public/images](https://github.com/pbatey/cyber-coffee-apocalypse/tree/master/public/images)
+
 # Running
 
 The application can be run as a web-application, in the ios simulator, or in the android emulator.
@@ -11,7 +13,7 @@ The application can be run as a web-application, in the ios simulator, or in the
 
 The ios and android environments require some prerequists be installed, see [https://github.com/meteor/meteor/wiki/Mobile-Dev-Install:-iOS-on-Mac]() and [https://github.com/meteor/meteor/wiki/Mobile-Development-Install:-Android-on-Mac]() for more info.
 
-_Note: I'm having trouble with android emulator install -- guess there was a recent change do Android Stuidio that the Meteor folks haven't quite worked out: [https://github.com/meteor/meteor/issues/5358]()._
+***Note:*** I'm having trouble with android emulator install -- guess there was a recent change do Android Stuidio that the Meteor folks haven't quite worked out: [https://github.com/meteor/meteor/issues/5358]().
 
 # Development
 
